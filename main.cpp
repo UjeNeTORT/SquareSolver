@@ -3,28 +3,33 @@
 #include <ctype.h>
 
 int solve (float *, float *);
-float getfloat(void);
+int getfloat(float *);
 
 int main() {
     int c;
 
+    /* array of a b c coeffs */
     float coef[3];
     float *cp = coef;
 
+    /* array of solutions */
     float sol[2];
     float *sp = sol;
 
     printf("enter a,b,c coefs:\n");
-
+    
     for (int i = 0; i < 3; i++) 
-        *cp++ = getfloat();
+        if (getfloat(cp++) == EOF) {
+            printf("not enough coeffs given\n");
+            return 1; 
+        }
 
     if ((c = solve(coef, sp)) == 0)
         printf("\tno solutions\n");
     else if (c == 1) 
         printf("\t1 solution:\n%.3f", sol[0]);
     else if (c == 2)
-        printf("\t2 solutions:\n%.3f\n%.3f\n", sol[0], sol[1]);
+        printf("\t2 solutions:\n%.3f\n%.3f", sol[0], sol[1]);
     
     return 0;
 }
@@ -55,30 +60,34 @@ int solve(float *coef, float *sol) {
 }
 
 
-float getfloat(void) {
+int getfloat(float *num) {
     int c, denom = 10;
     int negative = 0;
-    float num = 0.0;
-
-    /* skip all the blanks between numbers */
+    
+    /* skip all the blanks except \n */
     while (isspace(c = getchar()))
         ;
-    
+
+    if (c == EOF)
+        return c;
+
+    *num = 0.0;
+
     if (c == '-') {
         negative = 1;
         c = getchar();
     }
     /* get integer part of a number */
     while (isdigit(c)) {
-        num *= 10;
-        num += (float)(c - '0');
+        *num *= 10;
+        *num += (float)(c - '0');
         c = getchar();
     }
 
     /* get fractional part of a number */
     if (c == '.')
         while (isdigit(c = getchar())) {
-            num += ((float)(c - '0')) / denom;
+            *num += ((float)(c - '0')) / denom;
             denom *= 10;
         }
 
@@ -86,6 +95,7 @@ float getfloat(void) {
         printf("getfloat: invalid number \'%c\'\n", c);
 
     if (negative) 
-        num *= (-1.0);
-    return num;
+        *num *= (-1.0);
+        
+    return c;
 }
