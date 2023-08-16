@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
+
+#define MISTAKESIZE 1000
 
 int solve (float *coef, float *sol);
 
@@ -16,11 +19,11 @@ int main() {
 
     printf("enter a, b, c coefs:\n");
     
-    int res, junk;
-    
+    int res;
+    char *junk = (char *) malloc(MISTAKESIZE);
     while ((res = scanf("%f %f %f", &coef[0], &coef[1], &coef[2])) != 3) {
-        junk = getchar(); /* getting problem symbol out of the buffer */
-        printf("Incorrect input \"%c\", try again\n", junk);
+        scanf("%[^0-9.\n]", junk);
+        printf("Incorrect input \"%s\", try again\n", junk);
     }
 
     if ((c = solve(coef, sp)) == 0)
@@ -48,7 +51,7 @@ int solve(float *coef, float *sol) {
 
     if (d < 0) 
         return 0;
-    else if (d == 0) {
+    else if (d == 0.0) {
         *sol = (float)(-1) * coef[1] / (2 * coef[0]);
         return 1;
     }
@@ -58,5 +61,3 @@ int solve(float *coef, float *sol) {
     *sol = (float)((-coef[1] + sqrt(d)) / (2 * coef[0]));
     return 2;
 }
-
-
