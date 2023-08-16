@@ -31,8 +31,9 @@ int main() {
 /* returns number of solutions */
 int solve(float *coef, float *sol) {
     if (coef[0] == 0.0) {
-        printf("solve: \'a\' must not be 0\n");
-        return 0;
+        /* x = -c / b*/
+        *sol = ((-1.0) * coef[2]) / coef[1];
+        return 1;
     }
     
     float d;
