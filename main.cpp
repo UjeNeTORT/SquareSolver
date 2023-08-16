@@ -16,7 +16,8 @@ int main() {
 
     printf("enter a, b, c coefs:\n");
     
-    scanf(" %f %f %f", &coef[0], &coef[1], &coef[2]);
+    scanf("%f%*[^0-9.]%f%*[^0-9.]%f", &coef[0], &coef[1], &coef[2]);
+    
 
     if ((c = solve(coef, sp)) == 0)
         printf("\tno solutions\n");
@@ -53,6 +54,5 @@ int solve(float *coef, float *sol) {
     *sol = (float)((-coef[1] + sqrt(d)) / (2 * coef[0]));
     return 2;
 }
-
 
 
