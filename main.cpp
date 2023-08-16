@@ -16,8 +16,12 @@ int main() {
 
     printf("enter a, b, c coefs:\n");
     
-    scanf("%f%*[^0-9.]%f%*[^0-9.]%f", &coef[0], &coef[1], &coef[2]);
+    int res, junk;
     
+    while ((res = scanf("%f %f %f", &coef[0], &coef[1], &coef[2])) != 3) {
+        junk = getchar(); /* getting problem symbol out of the buffer */
+        printf("Incorrect input \"%c\", try again\n", junk);
+    }
 
     if ((c = solve(coef, sp)) == 0)
         printf("\tno solutions\n");
