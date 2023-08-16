@@ -4,6 +4,11 @@
 #include <ctype.h>
 
 #define MISTAKESIZE 1000
+#define EPS 1e-6
+
+/* floats are equal if |a-b| < EPS */
+#define isequal(a,b) (((a) > (b)) ? ((a)-(b) < EPS) : ((b)-(a) < EPS))
+
 
 int solve (float *coef, float *sol);
 
@@ -38,9 +43,9 @@ int main() {
 
 /* returns number of solutions */
 int solve(float *coef, float *sol) {
-    if (coef[0] == 0.0) {
+    if (isequal(coef[0], 0.0) == 1) {
         /* x = -c / b*/
-        *sol = ((-1.0) * coef[2]) / coef[1];
+        *sol = ((-1) * coef[2]) / coef[1];
         return 1;
     }
     
@@ -51,7 +56,7 @@ int solve(float *coef, float *sol) {
 
     if (d < 0) 
         return 0;
-    else if (d == 0.0) {
+    else if (isequal(d,0.0) == 1) {
         *sol = (float)(-1) * coef[1] / (2 * coef[0]);
         return 1;
     }
