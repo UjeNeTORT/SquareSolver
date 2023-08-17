@@ -26,8 +26,6 @@ int main() {
         printf("Incorrect input \"%c\", try again\n", junk);
     }
 
-    printf("%lf %lf %lf\n", coef[0], coef[1], coef[2]);
-
     switch(c = solve(coef, sol)) {
         case 0:
             printf("no solutions\n");
