@@ -101,7 +101,7 @@ void handle_coef_error (struct equation *eq) {
 
 int get_coefs(struct equation *eq) {
     static const int MAX_MISTAKES = 10; 
-    int res = 0, garbage = 0, flag = 0, cnt_mistakes = 0;
+    int res = 0, garbage = 0, cnt_mistakes = 0;
     while ((res = scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c)) != 3) {
         garbage = getchar();
         if (cnt_mistakes++ >= MAX_MISTAKES)
