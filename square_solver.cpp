@@ -43,7 +43,11 @@ int main() {
     if ((res_get_coefs =  get_coefs(&eq)) == ERR_TOO_MANY_MISTAKES) {
         printf("too many mistakes\n");
         return 1;
+    } else if (res_get_coefs == ERR_EOF) {
+        printf("end of the file\n");
+        return 1;
     }   
+    
 
     solve_input(&eq);
 
@@ -106,6 +110,8 @@ int get_coefs(struct equation *eq) {
         garbage = getchar();
         if (cnt_mistakes++ >= MAX_MISTAKES)
             return ERR_TOO_MANY_MISTAKES;
+        if (garbage == EOF)
+            return ERR_EOF;
         printf("Incorrect input \"%c\", try again\n", garbage);
     }
     return 0;
