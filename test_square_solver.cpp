@@ -26,7 +26,7 @@ int main() {
     int sol_n = 0; // number of solutions which "solve" has returned
 
     while (fscanf(fp, "####### test %d #######\n"
-    "%lf %lf %lf answer: %d %lf %lf", &test_num, &test_value.a, &test_value.b, &test_value.c, &sol_n, &ta.ans_1, &ta.ans_2) == 7) {
+    "%lf %lf %lf answer: %d %lf %lf\n", &test_num, &test_value.a, &test_value.b, &test_value.c, &sol_n, &ta.ans_1, &ta.ans_2) == 7) {
         solve(&test_value);
         if (test_value.sol_n == sol_n && is_equal(ta.ans_1, test_value.sol_1) && is_equal(ta.ans_2, test_value.sol_2) )
             printf("Test %d passed\n", test_num);
@@ -34,6 +34,7 @@ int main() {
             printf("Test %d FAILED: (%lf %lf) received instead of (%lf %lf)\n", test_num, test_value.sol_1, test_value.sol_2, ta.ans_1, ta.ans_2);
         else 
             printf("Test %d FAILED: %d received instead of %d", test_num, test_value.sol_n, sol_n);
+        test_value = {0.0, 0.0, 0.0, 0.0, 0.0, NULL};
     }
     fclose(fp);
     return 0;
