@@ -1,88 +1,142 @@
 #include <stdio.h>
 #include <math.h>
-#include <ctype.h>
 
-enum {SOL_0, SOL_1, SOL_2};
+enum roots_num {
+    ROOTS_NUM_0 = 0, 
+    ROOTS_NUM_1 = 1, 
+    ROOTS_NUM_2 = 2,
+    ROOTS_NUM_INF = 3,
+    ROOTS_NUM_ERR = 4
+};
 
-const int MISTAKE = 1000;
-const double EPS = 1e-6;
+enum error_names {
+    ERR_TOO_MANY_MISTAKES = 1,
+    ERR_EOF = 2  
+};
 
 struct equation {
-    double a,b,c,sol_1,sol_2;
-    int sol_n;
-} eq = {0.0, 0.0, 0.0, 0.0, 0.0, NULL};
+    double a, b, c; 
+    double x1, x2;
+    int number_roots;
+}; 
 
-int solve (struct equation *eq);
-int is_equal(double a, double b);
-void get_coefs(struct equation *eq);
+void solve_input(struct equation *eq);
+
+void solve_quadr_eq (struct equation *eq);
+void solve_lin_eq (struct equation *eq);
+void solve_inf_roots (struct equation *eq);
+void handle_coef_error (struct equation *eq);
+
+int get_coefs(struct equation *eq);
+void print_result(struct equation *eq);
+
+int is_equal(const double a, const double b);
 
 int main() {
-    int c;
+
+    struct equation eq = {0.0, 0.0, 0.0, 0.0, 0.0, -1};
+
     printf("Please, enter a, b, c coefs:\n"); 
 
-    get_coefs(&eq);
+    int res_get_coefs = -1;
 
-    switch(c = solve(&eq)) {
-        case SOL_0:
-            printf("no solutions\n");
-            break;
-        case SOL_1: 
-            printf("1 solution:\n"
-            "%.3lf\n", eq.sol_1);
-            break;
-        case SOL_2:
-            printf("2 solutions:\n"
-            "%.3lf , %.3lf\n", eq.sol_1, eq.sol_2);
-            break;
-        default:
-            printf("solve returned breeeed\n");
-            break;
-    }
+    if ((res_get_coefs =  get_coefs(&eq)) == ERR_TOO_MANY_MISTAKES) {
+        printf("too many mistakes\n");
+        return 1;
+    }   
+
+    solve_input(&eq);
+
+    print_result(&eq);
     
     return 0;
 }
 
-/* returns number of solutions */
-int solve(struct equation *eqp) {
-    if (is_equal((eqp->a), 0.0) == 1) {
-        /* x = -c / b*/
-        eqp->sol_1 = ((-1) * (eqp->c)) / (eqp->b);
-        eqp->sol_n = 1;
-        return SOL_1;
-    }
+void solve_input(struct equation *eq) {
+    if (!is_equal(eq->a, 0.0) && !is_equal(eq->b, 0.0))
+        solve_quadr_eq(eq);
+    else if (!is_equal(eq->b, 0.0))
+        solve_lin_eq(eq);
+    else if (is_equal(eq->c, 0.0))
+        solve_inf_roots(eq);
+    else
+        handle_coef_error(eq);
+}
+
+void solve_quadr_eq(struct equation *eq) {
     
-    double d, sd;
+    double discriminant = 0.0;
+    double sqrt_discriminant = 0.0;
 
-    /* d = b^2 - 4ac */
-    d = (eqp->b)*(eqp->b) - 4*(eqp->a)*(eqp->c);
-    sd = sqrt(d);
+    /* discriminant = b^2 - 4ac */
+    discriminant = (eq->b) * (eq->b) - 4 * (eq->a) * (eq->c);
+    sqrt_discriminant = sqrt(discriminant);
 
-    if (d < 0) {
-        eqp->sol_n = 0;
-        return SOL_0;
+    if (discriminant < 0) {
+        eq->number_roots = ROOTS_NUM_0;
     }
-    else if (is_equal(d,0.0) == 1) {
-        eqp->sol_1 = -(eqp->b) / (2 * (eqp->a));
-        eqp->sol_n = 1;
-        return SOL_1;
+    else if (is_equal(discriminant, 0.0)) {
+        eq->x1 = -(eq->b) / (2 * (eq->a));
+        eq->number_roots = ROOTS_NUM_1;
     }
-
-    /* BASED solution v lob */
-    eqp->sol_1 = (-(eqp->b) - sd) / (2 * (eqp->a));
-    eqp->sol_2 = (-(eqp->b) + sd) / (2 * (eqp->a));
-    eqp->sol_n = 2;
-    return SOL_2;
-}
-
-void get_coefs(struct equation *eqp) {
-    int res, junk;
-    while ((res = scanf("%lf %lf %lf", &eqp->a, &eqp->b, &eqp->c)) != 3) {
-        junk = getchar();
-        printf("Incorrect input \"%c\", try again\n", junk);
+    else {
+        eq->x1 = (-(eq->b) - sqrt_discriminant) / (2 * (eq->a));
+        eq->x2 = (-(eq->b) + sqrt_discriminant) / (2 * (eq->a));
+        eq->number_roots = ROOTS_NUM_2;
     }
 }
 
-/* doubles are equal if |a-b| < EPS */
-int is_equal(double a, double b) {
-    return (a > b) ? (a - b < EPS) : (b - a < EPS);
+void solve_lin_eq (struct equation *eq) {
+    eq->x1 = -(eq->c) / (eq->b);
+    eq->number_roots = ROOTS_NUM_1;
+}
+
+void solve_inf_roots (struct equation *eq) {
+    eq->number_roots = ROOTS_NUM_INF;
+}
+
+void handle_coef_error (struct equation *eq) {
+    eq->number_roots = ROOTS_NUM_ERR;
+}
+
+int get_coefs(struct equation *eq) {
+    static const int MAX_MISTAKES = 10; 
+    int res = 0, garbage = 0, flag = 0, cnt_mistakes = 0;
+    while ((res = scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c)) != 3) {
+        garbage = getchar();
+        if (cnt_mistakes++ >= MAX_MISTAKES)
+            return ERR_TOO_MANY_MISTAKES;
+        printf("Incorrect input \"%c\", try again\n", garbage);
+    }
+    return 0;
+}
+
+void print_result(struct equation *eq) {
+    switch(eq->number_roots) {
+        case ROOTS_NUM_0:
+            printf("no solutions\n");
+            break;
+        case ROOTS_NUM_1: 
+            printf("1 solution:\n"
+                   "%.3lf\n", eq->x1);
+            break;
+        case ROOTS_NUM_2:
+            printf("2 solutions:\n"
+                   "%.3lf , %.3lf\n", eq->x1, eq->x2);
+            break;
+        case ROOTS_NUM_INF:
+            printf("infinite solutions\n");
+            break;
+        case ROOTS_NUM_ERR:
+            printf("impossible coefs\n");
+            break;
+        default:
+            printf("solve_quadr_eq returned breeeed\n");
+            break;
+    }
+}
+
+int is_equal(const double a, const double b) {
+    static const double EPS = 1e-6;
+    return (fabs(a-b) < EPS);
 }
