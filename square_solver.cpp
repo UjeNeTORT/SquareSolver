@@ -59,12 +59,12 @@ int main() {
 }
 
 void solveInput(struct equation *eq) {
-    if (!isEqual(eq->a, 0.0) && !isEqual(eq->b, 0.0))
+    if (isEqual(eq->a, 0) && isEqual(eq->b, 0) && isEqual(eq->c, 0)) 
+        solveInfRoots(&eq->n_roots);
+    else if (!isEqual(eq->a, 0.0))
         solveQuadrEq(eq->a, eq->b, eq->c, &eq->x1, &eq->x2, &eq->n_roots);
     else if (!isEqual(eq->b, 0.0))
         solveLinEq(eq->b, eq->c, &eq->x1, &eq->n_roots);
-    else if (isEqual(eq->c, 0.0))
-        solveInfRoots(&eq->n_roots);
     else
         handleCoefError(&eq->n_roots);
 }
