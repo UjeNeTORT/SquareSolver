@@ -7,8 +7,8 @@
 #include "square_solver.h"
 #include "tester.h"
 
-void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag);
-void printInfo(void);
+static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag);
+static void printInfo(void);
 
 //-----------------------------------------------------
 /**
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
  * 
  * 
 */
-void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag) {
+static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag) {
     char *flagValue;
 
     while (--argc > 0 && **++argv == '-') {
@@ -100,10 +100,7 @@ void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag) 
  * @brief prints info message: name of the program, author and year before the rest of program
 */
 //-----------------------------------------------------
-void printInfo(void) {
+static void printInfo(void) {
     printf("# Square equation solver\n"
            "# (copyright concretno) Yaroslav, 2023\n\n");
 }
-
-// TODO:
-// - learn how to output coloured strings
