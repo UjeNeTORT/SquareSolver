@@ -68,7 +68,7 @@ void printResult(struct equation *eq);
 void printInfo(void);
 
 void resetEq(struct equation *eq);
-void resetTestAns(struct test_reference *testRef);
+void resetTestRef(struct test_reference *testRef);
 
 int isEqual(const double a, const double b);
 
@@ -95,7 +95,8 @@ int main(int argc, char *argv[]) {
         else if (strcmp(flagName, "h") == 0)
             printInfoFlag = 1;
         else 
-            printf("Invalid arguments\n");
+            printf("Invalid arguments \"%s\"\n"
+                   "Launch in solve-equation mode\n\n", flagName);
     }
     
     if (printInfoFlag)
@@ -106,8 +107,6 @@ int main(int argc, char *argv[]) {
     else {
 
         struct equation eq = {0, 0, 0, 0, 0, -1};
-
-        printf("# Please, enter a, b, c coefs:\n"); 
 
         int resGetCoefs = getCoefs(&eq); 
 
@@ -202,7 +201,7 @@ void testSolveInput(void) {
         nLastTest = testRef.nTest;
 
         resetEq(&testEq);
-        resetTestAns(&testRef);
+        resetTestRef(&testRef);
     }
     fclose(fp);
 
@@ -229,9 +228,12 @@ void testSolveInput(void) {
 //-----------------------------------------------------
 int getCoefs(struct equation *eq) {
     assert (eq);
-
+     
     static const unsigned MAX_MISTAKES = 10; 
     unsigned garbage = 0, cntWrngLines = 0;
+
+    printf("# Please, enter a, b, c coefs:\n");
+
     while (scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c) != 3) {
         garbage = getchar();
         while (garbage != '\n' && garbage != EOF)
@@ -369,7 +371,7 @@ void resetEq(struct equation *eq) {
  * @param [out] testRef pointer to struct test_reference variable testRef
 */
 //-----------------------------------------------------
-void resetTestAns(struct test_reference *testRef) {
+void resetTestRef(struct test_reference *testRef) {
     *testRef = {0, 0, 0, 0};
 }
 
