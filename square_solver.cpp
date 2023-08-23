@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
     if (printInfoFlag)
         printInfo();
 
-    if (testModeFlag) resGetCoefs
+    if (testModeFlag) 
         testSolveInput();
     else {
 
