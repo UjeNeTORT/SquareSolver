@@ -36,11 +36,11 @@ void printResult(struct equation *eq) {
             break;
         case ROOTS_1: 
             printf("1 solution:\n"
-                   "%.3lf\n", eq->x1);
+                   "%.6lf\n", eq->x1);
             break;
         case ROOTS_2:
             printf("2 solutions:\n"
-                   "%.3lf , %.3lf\n", eq->x1, eq->x2);
+                   "%.6lf , %.6lf\n", eq->x1, eq->x2);
             break;
         case ROOTS_INF:
             printf("infinite solutions\n");

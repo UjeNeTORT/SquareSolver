@@ -5,9 +5,9 @@
 */
 //-----------------------------------------------------
 struct test_reference {
-    int nTest;      ///< number of testcase
+    int    nTest;   ///< number of testcase
     double x1, x2;  ///< x1 - smaller solution to the equation, x2 - bigger one (reference)
-    int nRoots;     ///< number of roots (reference)
+    int    nRoots;  ///< number of roots (reference)
 };
 
 //-----------------------------------------------------
@@ -23,7 +23,7 @@ struct test_reference {
  * 
  * defines two variables (testsPassed, nLastTest) which are used later for printing test results\n
  * if test passed it prints it\n
- * if test failed it prints what is wrong\n
+ * if test failed it prints what is wrong (wrong roots order or root value or nRoots etc.)\n
  * 
 */
 //-----------------------------------------------------

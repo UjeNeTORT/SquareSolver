@@ -50,7 +50,7 @@ void solveQuadrEq(const double a, const double b, const double c, double *x1, do
     } else {
         *x1 = (-b - sqrtDiscriminant) / (2 * a);
         *x2 = (-b + sqrtDiscriminant) / (2 * a);
-        if (x1 > x2)
+        if (*x1 > *x2)
             swapDbl(x1, x2);
         *nRoots = ROOTS_2;
     }
@@ -67,6 +67,8 @@ void solveLinEq (const double a, const double b, double *x) {
 }
 
 void swapDbl(double *a, double *b) {
+    assert (a);
+    assert (b);
     double temp = *a;
     *a = *b;
     *b = temp;

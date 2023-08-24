@@ -7,7 +7,7 @@
 struct equation {
     double a, b, c;  ///< quadratic equation coefficients
     double x1, x2;   ///< quadratic equation roots (x1-smaller. x2-bigger)
-    int nRoots;      ///< number of roots
+    int    nRoots;      ///< number of roots
 };
 
 //-----------------------------------------------------
