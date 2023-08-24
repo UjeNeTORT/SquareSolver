@@ -1,8 +1,10 @@
+#ifndef GET_PRINT_EQ_H
+#define GET_PRINT_EQ_H
+
 //-----------------------------------------------------
 /**
  * @enum input_errs
 */
-//-----------------------------------------------------
 enum input_errs {
     ERR_OVERFLOW_INPUT = 1, ///< if too many mistakes 
     ERR_EOF = 2             ///< if EOF occures
@@ -22,7 +24,6 @@ enum input_errs {
  * if user mistakes during the input   it does not read the rest of the line and asks to try again\n
  * (for example types in a letter)\n
 */
-//-----------------------------------------------------
 int getCoefs (struct equation *eq);
 
 //-----------------------------------------------------
@@ -35,5 +36,6 @@ int getCoefs (struct equation *eq);
  * if 2 roots               it prints *2 solutions:*, the smaller root and then the bigger root\n
  * if roots are infinite    it prints *infinite solutions*\n
 */
-//-----------------------------------------------------
 void printResult(struct equation *eq);
+
+#endif

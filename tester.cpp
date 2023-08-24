@@ -10,10 +10,12 @@
 
 void testSolveSquare(void) {
     
-    FILE *fp = fopen("test_cases.txt", "r");
+    FILE *fp = fopen("test_cases.txt", "r"); 
 
-    struct equation testEq = {.a = 0, .b = 0, .c = 0, .x1 = 0, .x2 = 0, .nRoots = -1};
-    struct test_reference testRef = {.nTest = 0, .x1 = 0, .x2 = 0, .nRoots = 0};
+    assert (fp);
+
+    struct equation testEq = {0, 0, 0, 0, 0, -1};
+    struct test_reference testRef = {0, 0, 0, 0};
     
     int testsPassed = 0, nLastTest = 0;
 
@@ -22,19 +24,19 @@ void testSolveSquare(void) {
 
         solveSquare(&testEq);
 
-        // TODO moshneyshiy print
-        if (testEq.nRoots != testRef.nRoots)
-            printf("Test %-4d FAILED:\n"
-                   "wrong nRoots: expected %d, received %d\n", testRef.nTest, testRef.nRoots, testEq.nRoots);
-        else if (!isEqual(testRef.x1, testRef.x2) && isEqual(testEq.x1, testRef.x2) && isEqual(testEq.x2, testRef.x1))
-            printf("Test %-4d FAILED: wrong order\n", testRef.nTest);
-        else if (!isEqual(testEq.x1, testRef.x1)) 
-            printf("Test %-4d FAILED:\n"
+        if (testEq.nRoots != testRef.nRoots) {
+            printf("Test %-4d FAILED\n"
+                   "Wrong nRoots: expected %d, received %d\n", testRef.nTest, testRef.nRoots, testEq.nRoots);
+        } else if (!isEqual(testRef.x1, testRef.x2) && isEqual(testEq.x1, testRef.x2) && isEqual(testEq.x2, testRef.x1)) {
+            printf("Test %-4d FAILED\n"
+                   "Wrong order: expected (%lf %lf), received (%lf %lf)\n", testRef.nTest, testRef.x1, testRef.x2, testEq.x1, testEq.x2);
+        } else if (!isEqual(testEq.x1, testRef.x1)) {
+            printf("Test %-4d FAILED\n"
                    "x1: expected %lf, received %lf\n", testRef.nTest, testRef.x1, testEq.x1);
-        else if (!isEqual(testEq.x2, testRef.x2))
-            printf("Test %-4d FAILED:\n"
+        } else if (!isEqual(testEq.x2, testRef.x2)) {
+            printf("Test %-4d FAILED\n"
                    "x2: expected %lf, received %lf\n", testRef.nTest, testRef.x2, testEq.x2);
-        else {
+        } else {
             printf("Test %-4d PASSED\n", testRef.nTest);
             testsPassed++;
         }
@@ -44,6 +46,7 @@ void testSolveSquare(void) {
         resetEq(&testEq);
         resetTestRef(&testRef);
     }
+
     fclose(fp);
 
     printf("##########################\n"
@@ -53,9 +56,9 @@ void testSolveSquare(void) {
 }
 
 void resetEq(struct equation *eq) {
-    *eq = {.a = 0, .b = 0, .c = 0, .x1 = 0, .x2 = 0, .nRoots = -1};
+    *eq = {0, 0, 0, 0, 0, -1};
 }
 
 void resetTestRef(struct test_reference *testRef) {
-    *testRef = {.nTest = 0, .x1 = 0, .x2 = 0, .nRoots = 0};
+    *testRef = {0, 0, 0, 0};
 }

@@ -10,17 +10,17 @@
 void solveSquare(struct equation *eq) {
     assert (eq);
 
-    if (isEqual(eq->a, 0) && isEqual(eq->b, 0) && isEqual(eq->c, 0)) 
+    if (isEqual(eq->a, 0) && isEqual(eq->b, 0) && isEqual(eq->c, 0)) {
         eq->nRoots = ROOTS_INF;
-    else if (!isEqual(eq->a, 0.0)) 
+    } else if (!isEqual(eq->a, 0.0)) {
         solveQuadrEq(eq->a, eq->b, eq->c, &eq->x1, &eq->x2, &eq->nRoots);
-    else if (!isEqual(eq->b, 0.0)) {
+    } else if (!isEqual(eq->b, 0.0)) {
         solveLinEq(eq->b, eq->c, &eq->x1);
         eq->nRoots = ROOTS_1;
         eq->x2 = eq->x1;
-    }
-    else 
+    } else {
         eq->nRoots = ROOTS_0;
+    }
 }
 
 void solveQuadrEq(const double a, const double b, const double c, double *x1, double *x2, int *nRoots) {
@@ -41,7 +41,6 @@ void solveQuadrEq(const double a, const double b, const double c, double *x1, do
     
     double sqrtDiscriminant = sqrt(discriminant); 
 
-    // in case discriminant == -0:
     if (isEqual(discriminant, 0)) {
         *x1 = *x2 = -b / (2 * a);
         *nRoots = ROOTS_1;
@@ -50,9 +49,11 @@ void solveQuadrEq(const double a, const double b, const double c, double *x1, do
     } else {
         *x1 = (-b - sqrtDiscriminant) / (2 * a);
         *x2 = (-b + sqrtDiscriminant) / (2 * a);
+
+        *nRoots = ROOTS_2;
+
         if (*x1 > *x2)
             swapDbl(x1, x2);
-        *nRoots = ROOTS_2;
     }
 }
 
@@ -75,5 +76,5 @@ void swapDbl(double *a, double *b) {
 }
 
 int isEqual(const double a, const double b) {
-    return (fabs(a-b) < EPS);
+    return (fabs(a - b) < EPS);
 }

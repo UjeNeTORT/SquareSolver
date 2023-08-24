@@ -1,3 +1,6 @@
+#ifndef SQUARE_SOLVER_H
+#define SQUARE_SOLVER_H
+
 //-----------------------------------------------------
 /**
  * @brief given the equation coeffs it solves the equation
@@ -13,7 +16,6 @@
  * else if (a != 0 && b != 0)      calls func solveLinEq(...) and sets x2 = x1 (as we need it for tests)\n
  * else                            sets nRoots to ROOTS_0\n
 */
-//-----------------------------------------------------
 void solveSquare (struct equation *eq);
 
 //-----------------------------------------------------
@@ -31,7 +33,6 @@ void solveSquare (struct equation *eq);
  * if equation has 1 root,   nRoots = 1, x1 = x2 = *root of equation*\n
  * if equation has 2 roots,  nRoots = 2, x1 = *smaller root*, x2 = *bigger root*
 */
-//-----------------------------------------------------
 void solveQuadrEq (const double a, const double b, const double c, double *x1, double *x2, int *nRoots);
 
 //-----------------------------------------------------
@@ -41,9 +42,9 @@ void solveQuadrEq (const double a, const double b, const double c, double *x1, d
  * @param [in] b b-coefficient
  * @param [out] x solution of the equation
 */
-//-----------------------------------------------------
 void solveLinEq (const double b, const double c, double *x);
 
+//-----------------------------------------------------
 /**
  * @brief swaps doubles a and b
  * @param [out] a a-variable
@@ -52,6 +53,7 @@ void solveLinEq (const double b, const double c, double *x);
  * swaps doubles a and b using temporary variable temp 
 */
 void swapDbl(double *a, double *b);
+
 //-----------------------------------------------------
 /**
  * @brief compares two double values, returns 1 if equal, 0 if not
@@ -62,7 +64,8 @@ void swapDbl(double *a, double *b);
  * a == b if |a-b| < EPS,
  * where EPS is const and defined outside the function
 */
-//-----------------------------------------------------
 int isEqual(const double a, const double b);
 
 const double EPS = 1e-6;
+
+#endif

@@ -7,8 +7,37 @@
 #include "square_solver.h"
 #include "tester.h"
 
+//-----------------------------------------------------
+/**
+ * @brief processes cmd-line args and sets flags
+ * 
+ * @param [in] argc               copy of param *argc* from main
+ * @param [in] argv               copy of param *argv* from main
+ * 
+ * @param [out] testModeFLag      is set to 1 if -test typed in\n
+ *                                (later it is used to start testing), initial value is 0
+ * 
+ * @param [out] printInfoFlag     is set to 1 if  -h typed in\n
+ *                                (later it is used to print info about the program(, initial value is 0
+ * 
+ * @details 
+ * Iterates through argv array while first symbol of the next argument is '-'.\n
+ * It sets flagValue equal to the rest of the current argument (without '-').\n\n
+ * 
+ * if (flagValue == "test")\n      sets testModeFLag to 1\n\n
+ * if (flagValue == "h")\n         sets printInfoFlag to 1\n\n
+ * else\n                          prints error message\n\n
+ * 
+ * 
+*/
 static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag);
+
+//-----------------------------------------------------
+/**
+ * @brief prints info message: name of the program, author and year before the rest of program
+*/
 static void printInfo(void);
+
 
 //-----------------------------------------------------
 /**
@@ -57,29 +86,6 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-
-/**
- * @brief processes cmd-line args and sets flags
- * 
- * @param [in] argc               copy of param *argc* from main
- * @param [in] argv               copy of param *argv* from main
- * 
- * @param [out] testModeFLag      is set to 1 if -test typed in\n
- *                                (later it is used to start testing), initial value is 0
- * 
- * @param [out] printInfoFlag     is set to 1 if  -h typed in\n
- *                                (later it is used to print info about the program(, initial value is 0
- * 
- * @details 
- * Iterates through argv array while first symbol of the next argument is '-'.\n
- * It sets flagValue equal to the rest of the current argument (without '-').\n\n
- * 
- * if (flagValue == "test")\n      sets testModeFLag to 1\n\n
- * if (flagValue == "h")\n         sets printInfoFlag to 1\n\n
- * else\n                          prints error message\n\n
- * 
- * 
-*/
 static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInfoFlag) {
     char *flagValue;
 
@@ -91,16 +97,13 @@ static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInf
         else if (strcmp(flagValue, "h") == 0)
             *printInfoFlag = 1;
         else
-            printf("Invalid arguments \"%s\"\n"
-                   "Launch in solve-equation mode\n\n", flagValue);
+            printf("Invalid command line argument \"%s\"\n\n"
+                   "Possible args:\n"
+                   "-h       shows header info\n"
+                   "-test    starts program testing\n\n", flagValue);
     }
 }
 
-//-----------------------------------------------------
-/**
- * @brief prints info message: name of the program, author and year before the rest of program
-*/
-//-----------------------------------------------------
 static void printInfo(void) {
     printf("# Square equation solver\n"
            "# (copyright concretno) Yaroslav, 2023\n\n");

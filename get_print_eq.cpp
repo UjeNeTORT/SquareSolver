@@ -16,14 +16,19 @@ int getCoefs(struct equation *eq) {
 
     while (scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c) != 3) {
         garbage = getchar();
+
         while (garbage != '\n' && garbage != EOF)
             garbage = getchar();
+
         if (garbage == EOF)
             return ERR_EOF;
+
         printf("Incorrect input, try again\n");
+
         if (cntWrngLines++ >= MAX_MISTAKES)
             return ERR_OVERFLOW_INPUT;
     }
+
     return 0;
 }
 
@@ -40,7 +45,7 @@ void printResult(struct equation *eq) {
             break;
         case ROOTS_2:
             printf("2 solutions:\n"
-                   "%.6lf , %.6lf\n", eq->x1, eq->x2);
+                   "%.3lf , %.3lf\n", eq->x1, eq->x2);
             break;
         case ROOTS_INF:
             printf("infinite solutions\n");

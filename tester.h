@@ -1,9 +1,11 @@
+#ifndef TESTER_H
+#define TESTER_H
+
 //-----------------------------------------------------
 /**
  * @struct test_reference
  * @brief used to store number of the test_case  and answers to it (number of roots of equation and roots themselves x1, x2) 
 */
-//-----------------------------------------------------
 struct test_reference {
     int    nTest;   ///< number of testcase
     double x1, x2;  ///< x1 - smaller solution to the equation, x2 - bigger one (reference)
@@ -26,7 +28,6 @@ struct test_reference {
  * if test failed it prints what is wrong (wrong roots order or root value or nRoots etc.)\n
  * 
 */
-//-----------------------------------------------------
 void testSolveSquare(void);
 
 //-----------------------------------------------------
@@ -34,7 +35,6 @@ void testSolveSquare(void);
  * @brief resets eq to initial value
  * @param [out] eq struct equation, which has all the necessary information about the equation (coefs, roots, number of roots)
 */
-//-----------------------------------------------------
 void resetEq(struct equation *eq);
 
 //-----------------------------------------------------
@@ -42,5 +42,6 @@ void resetEq(struct equation *eq);
  * @brief resets testRef to initial value
  * @param [out] testRef pointer to struct test_reference variable testRef
 */
-//-----------------------------------------------------
 void resetTestRef(struct test_reference *testRef);
+
+#endif
