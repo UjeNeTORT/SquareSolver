@@ -20,7 +20,7 @@ static void printInfo(void);
  * 
  * @returns 0 - default\n
  *          1 - if user typed in too much shit\n
- *          2 - if EOF 
+ *          2 - if EOF\n
 */
 //-----------------------------------------------------
 int main(int argc, char *argv[]) {
@@ -29,13 +29,13 @@ int main(int argc, char *argv[]) {
 
     getCmdFlags(argc, argv, &testModeFlag, &printInfoFlag);
 
-    if (printInfoFlag)
+    if (printInfoFlag) {
         printInfo();
+    }
 
-    if (testModeFlag)
-        testSolveInput();
-        
-    else {
+    if (testModeFlag) {
+        testSolveSquare();
+    } else {
 
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
@@ -53,6 +53,7 @@ int main(int argc, char *argv[]) {
 
         printResult(&eq);
     }
+
     return 0;
 }
 
