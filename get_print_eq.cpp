@@ -17,9 +17,8 @@ int getCoefs(struct equation *eq) {
 
     while (true) {
         buffClearRes = 0;
-        if (scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c) == 3) {
+        if (scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c) == 3) 
             if ((buffClearRes = clearBuff()) != 0) break;
-        }
 
         printf("Incorrect input, try again\n");
 
