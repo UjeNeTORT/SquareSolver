@@ -3,9 +3,9 @@
 
 //-----------------------------------------------------
 /**
- * @enum input_errs
+ * @enum InputErrs
 */
-enum input_errs {
+enum InputErrs {
     ERR_OVERFLOW_INPUT = 1, ///< if too many mistakes 
     ERR_EOF = 2             ///< if EOF occures
 };
@@ -37,5 +37,13 @@ int getCoefs (struct equation *eq);
  * if roots are infinite    it prints *infinite solutions*\n
 */
 void printResult(struct equation *eq);
+
+/**
+ * @brief clears buffer
+ * @returns '\n' if the last symbol in buffer was '\n' \n
+ *           EOF if the last symbol in buffer was EOF \n
+ *           0   if it encountered not-space symbols while cleaning the buffer \n
+*/
+int clearBuff(void);
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef SQUARE_SOLVER_H
 #define SQUARE_SOLVER_H
 
+const double EPS = 1e-6;
+
 //-----------------------------------------------------
 /**
  * @brief given the equation coeffs it solves the equation
@@ -21,11 +23,11 @@ void solveSquare (struct equation *eq);
 //-----------------------------------------------------
 /**
  * @brief solves quadratic equation ax^2 + bx + c = 0
- * @param [in]  a a-coefficient
- * @param [in]  b b-coefficient
- * @param [in]  c c-coefficient
- * @param [out] x1 smaller root
- * @param [out] x2 bigger root
+ * @param [in]  a      a-coefficient
+ * @param [in]  b      b-coefficient
+ * @param [in]  c      c-coefficient
+ * @param [out] x1     smaller root
+ * @param [out] x2     bigger root
  * @param [out] nRoots number of roots of the equation
  * 
  * @details
@@ -38,11 +40,12 @@ void solveQuadrEq (const double a, const double b, const double c, double *x1, d
 //-----------------------------------------------------
 /**
  * @brief solves linear equation ax + b = 0 
- * @param [in] a a-coefficient, a != 0
- * @param [in] b b-coefficient
- * @param [out] x solution of the equation
+ * @param [in]  a       a-coefficient, a != 0
+ * @param [in]  b       b-coefficient
+ * @param [out] x       solution of the equation
+ * @param [out] nRoots  number of roots of equation
 */
-void solveLinEq (const double b, const double c, double *x);
+void solveLinEq (const double a, const double b, double *x, int *nRoots);
 
 //-----------------------------------------------------
 /**
@@ -65,7 +68,5 @@ void swapDbl(double *a, double *b);
  * where EPS is const and defined outside the function
 */
 int isEqual(const double a, const double b);
-
-const double EPS = 1e-6;
 
 #endif

@@ -15,7 +15,7 @@ void testSolveSquare(void) {
     assert (fp);
 
     struct equation testEq = {0, 0, 0, 0, 0, -1};
-    struct test_reference testRef = {0, 0, 0, 0};
+    struct testReference testRef = {0, 0, 0, 0};
     
     int testsPassed = 0, nLastTest = 0;
 
@@ -59,6 +59,6 @@ void resetEq(struct equation *eq) {
     *eq = {0, 0, 0, 0, 0, -1};
 }
 
-void resetTestRef(struct test_reference *testRef) {
+void resetTestRef(struct testReference *testRef) {
     *testRef = {0, 0, 0, 0};
 }

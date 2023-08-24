@@ -51,7 +51,6 @@ static void printInfo(void);
  *          1 - if user typed in too much shit\n
  *          2 - if EOF\n
 */
-//-----------------------------------------------------
 int main(int argc, char *argv[]) {
 
     int testModeFlag = 0, printInfoFlag = 0;
@@ -104,7 +103,7 @@ static void getCmdFlags(int argc, char *argv[], int *testModeFlag, int *printInf
     }
 }
 
-static void printInfo(void) {
+static void printInfo() {
     printf("# Square equation solver\n"
            "# (copyright concretno) Yaroslav, 2023\n\n");
 }

@@ -3,10 +3,10 @@
 
 //-----------------------------------------------------
 /**
- * @struct test_reference
+ * @struct testReference
  * @brief used to store number of the test_case  and answers to it (number of roots of equation and roots themselves x1, x2) 
 */
-struct test_reference {
+struct testReference {
     int    nTest;   ///< number of testcase
     double x1, x2;  ///< x1 - smaller solution to the equation, x2 - bigger one (reference)
     int    nRoots;  ///< number of roots (reference)
@@ -19,7 +19,7 @@ struct test_reference {
  * reads test cases from a file specified in fopen(...)\n
  * 
  * initializes struct equation testEq, later fills it with a, b, c coefs from test cases file\n
- * initializes struct test_reference testRef, later fills it with test answers and test number\n
+ * initializes struct testReference testRef, later fills it with test answers and test number\n
  * 
  * testEq and testRef are reset to their initial value at the end of each iteration\n
  * 
@@ -40,8 +40,8 @@ void resetEq(struct equation *eq);
 //-----------------------------------------------------
 /**
  * @brief resets testRef to initial value
- * @param [out] testRef pointer to struct test_reference variable testRef
+ * @param [out] testRef pointer to struct testReference variable testRef
 */
-void resetTestRef(struct test_reference *testRef);
+void resetTestRef(struct testReference *testRef);
 
 #endif
