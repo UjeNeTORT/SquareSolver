@@ -14,5 +14,5 @@ Installation guide:
 5. If you want to learn about compilation flags you can use, repeat step 5, but before pressing enter type --help
 Enjoy math!
 
-The project was created by Tikhonov Yaroslav in education purposes. 
+The project was created by Tikhonov Yaroslav in educational purposes. 
 2023.
