@@ -8,11 +8,20 @@
 #include "square_solver.h"
 
 
-void testSolveSquare(void) {
-    
-    FILE *fp = fopen("test_cases.txt", "r"); // TODO read fname from argv 
+void testSolveSquare(const char *fname) {
 
-    assert (fp);
+    FILE *fp = NULL;
+
+    if (strcmp(fname, "default") == 0)
+        fp = fopen(DFLT_TEST_FILE, "r");
+    else
+        fp = fopen(fname, "r");
+
+    if (fp == NULL) {
+        printf("Unable to open the %s file, check if it's name is correct\n", fname);
+        return ;
+    }
+
 
     struct equation testEq = {0, 0, 0, 0, 0, -1};
     struct testReference testRef = {0, 0, 0, 0};

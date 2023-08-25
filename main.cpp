@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <assert.h>
 #include "equation.h"
 #include "get_print_eq.h"
@@ -8,19 +9,14 @@
 #include "tester.h"
 
 
-struct cmdLineFlags {
-    int launchDefaultFlag;  ///< if 1 - default mode, if 0 - stops execution after flag-connected stuff
-    int testModeFlag;       ///< if 1 - program launches in test mode
-    int printHelpFlag;      ///< if 1 - prints info about the program and cmd line args possible
-};
 //-----------------------------------------------------
 /**
  * @brief processes cmd-line args and sets flags
  * 
- * @param [in] argc               copy of param *argc* from main
- * @param [in] argv               copy of param *argv* from main
+ * @param [in] argc                 copy of param *argc* from main
+ * @param [in] argv                 copy of param *argv* from main
  * 
- * @param [out] flags             stores all the cmd line flags 
+ * @param [out] launchDefaultFlag   1 - if after flags handling we should run the main program, 0 - if not 
  * 
  * @details 
  * Iterates through argv array while first symbol of the next argument is '-'.\n
@@ -33,13 +29,20 @@ struct cmdLineFlags {
  * 
  * 
 */
-static void getCmdFlags(int argc, char *argv[], struct cmdLineFlags *flags);
+static void getCmdFlags(int argc, char *argv[], int *launchDefaultFlag);
 
+//-----------------------------------------------------
 /**
  * @brief prints info message about the program author and possible custom compilation flags\n 
 */
 static void printHelp();
 
+//-----------------------------------------------------
+/**
+ * @brief prints error message if flag was incorrect 
+ * @param [out] flagValue flag itself
+*/
+static void printFlagErr(const char *flagValue);
 
 //-----------------------------------------------------
 /**
@@ -57,21 +60,11 @@ static void printHelp();
 */
 int main(int argc, char *argv[]) {
     
-    struct cmdLineFlags flags = {1, 0, 0};
+    int launchDefaultFlag = 1;
 
-    getCmdFlags(argc, argv, &flags);
+    getCmdFlags(argc, argv, &launchDefaultFlag);
 
-    if (flags.printHelpFlag) {
-        printHelp();
-        flags.launchDefaultFlag = 0;
-    }
-    
-    if (flags.testModeFlag) {
-        testSolveSquare();
-        flags.launchDefaultFlag = 0;
-    }
-
-    if (flags.launchDefaultFlag) {
+    if (launchDefaultFlag) {
 
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
@@ -93,19 +86,28 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-static void getCmdFlags(int argc, char *argv[], struct cmdLineFlags *flags) {
+static void getCmdFlags(int argc, char *argv[], int *launchDefaultFlag) {
     char *flagValue;
 
-    while (--argc > 0 && **++argv == '-') {
-        flagValue = ++*argv;
+    while (--argc > 0) {
+        flagValue = *++argv;
+        if (strcmp(flagValue, "--test") == 0) {
+            *launchDefaultFlag = 0;
 
-        if (strcmp(flagValue, "-test") == 0)
-            flags->testModeFlag = 1;
-        else if (strcmp(flagValue, "-help") == 0)
-            flags->printHelpFlag = 1;
-        else
-            printf("Invalid command line argument \"%s\"\n"
-                   "To learn about possible flags use --help flag\n\n", flagValue);
+            argv++;
+
+            if (!*argv || !isalnum(**argv)) {
+                testSolveSquare("default");
+                argv--;
+            } else {
+                testSolveSquare(*argv);
+            }
+        } else if (strcmp(flagValue, "--help") == 0) {
+            printHelp();
+            *launchDefaultFlag = 0;
+        } else {
+            printFlagErr(flagValue);
+        }
     }
 }
 
@@ -113,7 +115,11 @@ static void printHelp() {
     printf("# Square equation solver\n"
            "# (copyright) Yaroslav, 2023\n\n"
            "Options:\n"
-           "--help   prints info about compilation flags\n"
-           "--info   shows info about the program, its author and year of publishing\n"
+           "--help   prints info about program, its author and compilation flags\n"
            "--test   starts unit-testing and prints info about it results\n\n");
+}
+
+static void printFlagErr(const char *flagValue) {
+    printf("Invalid command line argument \"%s\"\n"
+           "To learn about possible flags use --help flag\n\n", flagValue);    
 }
