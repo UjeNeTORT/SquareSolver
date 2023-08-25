@@ -1,7 +1,7 @@
 # SquareSolver
 ###### SquareSolver is an open source console application for solving quadratic equations.
 
-### ATTENTION! 
+##### ATTENTION! 
 To use it you have to have g++ compiler installed on your PC. (guide for Windows: https://www.freecodecamp.org/news/how-to-install-c-and-cpp-compiler-on-windows/)
 
 Installation guide:
