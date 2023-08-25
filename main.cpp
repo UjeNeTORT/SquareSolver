@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <assert.h>
 #include "equation.h"
 #include "get_print_eq.h"
 #include "square_solver.h"
@@ -68,7 +66,7 @@ int main(int argc, char *argv[]) {
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
         int resGetCoefs = readCoefs(&eq);
-        // TODO func
+        
         if (resGetCoefs == ERR_OVERFLOW_INPUT) {
             printf("Program cant run further: input overflow\n");
             return 1;

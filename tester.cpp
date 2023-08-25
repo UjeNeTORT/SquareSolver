@@ -1,8 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include <string.h>
-#include <assert.h>
 #include "equation.h"
 #include "tester.h"
 #include "square_solver.h"
@@ -32,7 +29,7 @@ void testSolveSquare(const char *fname) {
         fp = fopen(fname, "r");
 
     if (fp == NULL) {
-        printf("Unable to open the %s file, check if it's name is correct\n", fname);
+        printf("Unable to open the \"%s\" file, check if it's name is correct\n", fname);
         return ;
     }
 

@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <assert.h>
 #include <ctype.h>
 #include "equation.h"
 #include "get_print_eq.h"
 
+
+//-----------------------------------------------------
 /**
  * @brief clears buffer
  * @returns '\n' if the last symbol in buffer was '\n' \n
