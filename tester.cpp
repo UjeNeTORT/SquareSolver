@@ -8,6 +8,20 @@
 #include "square_solver.h"
 
 
+//-----------------------------------------------------
+/**
+ * @brief resets eq to initial value
+ * @param [out] eq struct equation, which has all the necessary information about the equation (coefs, roots, number of roots)
+*/
+void resetEq(struct equation *eq);
+
+//-----------------------------------------------------
+/**
+ * @brief resets testRef to initial value
+ * @param [out] testRef pointer to struct testReference variable testRef
+*/
+void resetTestRef(struct testReference *testRef);
+
 void testSolveSquare(const char *fname) {
 
     FILE *fp = NULL;
@@ -64,10 +78,10 @@ void testSolveSquare(const char *fname) {
            "##########################\n", testsPassed, nLastTest, (double) testsPassed / nLastTest * 100);
 }
 
-void resetEq(struct equation *eq) {
+static void resetEq(struct equation *eq) {
     *eq = {0, 0, 0, 0, 0, -1};
 }
 
-void resetTestRef(struct testReference *testRef) {
+static void resetTestRef(struct testReference *testRef) {
     *testRef = {0, 0, 0, 0};
 }
