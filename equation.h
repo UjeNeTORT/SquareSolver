@@ -7,9 +7,12 @@
  * @brief used to store info about quadratic equation ax^2 + bx + c = 0
 */
 struct equation {
-    double a, b, c;  ///< quadratic equation coefficients
-    double x1, x2;   ///< quadratic equation roots (x1-smaller. x2-bigger)
-    int    nRoots;   ///< number of roots
+    double a;       ///< a-coefficient
+    double b;       ///< b-coefficient
+    double c;       ///< c-coefficient
+    double x1;      ///< smaller equation root
+    double x2;      ///< bigger equation root
+    int nRoots;     ///< number of roots
 };
 
 //-----------------------------------------------------
