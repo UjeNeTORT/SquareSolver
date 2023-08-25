@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
         int resGetCoefs = readCoefs(&eq);
-
+        // TODO func
         if (resGetCoefs == ERR_OVERFLOW_INPUT) {
             printf("Program cant run further: input overflow\n");
             return 1;
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
             printf("Program cant run further: end of the file\n");
             return 2;
         }
-
+        
         solveSquare(&eq);
 
         printResult(&eq);
