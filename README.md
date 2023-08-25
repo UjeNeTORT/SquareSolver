@@ -17,10 +17,4 @@ Enjoy math!
 The project was created by Tikhonov Yaroslav in educational purposes. 
 2023.
 
-   |\---/|
-   | ,_, |
-    \_`_/-..----.
- ___/ `   ' ,""+ \  sk
-(__...'   __\    |`.___.';
-  (_,...'(_,.`__)/'.....+
-  
+###### meow.
