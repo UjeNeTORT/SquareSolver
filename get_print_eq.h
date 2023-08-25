@@ -38,12 +38,4 @@ int readCoefs (struct equation *eq);
 */
 void printResult(struct equation *eq);
 
-/**
- * @brief clears buffer
- * @returns '\n' if the last symbol in buffer was '\n' \n
- *           EOF if the last symbol in buffer was EOF \n
- *           0   if it encountered not-space symbols while cleaning the buffer \n
-*/
-int clearBuff(void);
-
 #endif

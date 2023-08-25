@@ -6,6 +6,13 @@
 #include "equation.h"
 #include "get_print_eq.h"
 
+/**
+ * @brief clears buffer
+ * @returns '\n' if the last symbol in buffer was '\n' \n
+ *           EOF if the last symbol in buffer was EOF \n
+ *           0   if it encountered not-space symbols while cleaning the buffer \n
+*/
+static int clearBuff(void);
 
 int readCoefs(struct equation *eq) { 
     assert (eq);
@@ -61,7 +68,7 @@ void printResult(struct equation *eq) {
     }               
 }               
 
-int clearBuff(void) {
+static int clearBuff(void) {
     int garbage = 0, notStumble = 1;
     
     while ((garbage = getchar()) != '\n' && garbage != EOF)

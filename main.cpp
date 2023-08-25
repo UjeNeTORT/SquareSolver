@@ -50,8 +50,7 @@ static void printFlagErr(const char *flagValue);
  * @details
  * depending on what cmd-line arguments are it can:\n
  * --test        runs all the unit-tests from the test_cases file\n
- * --info        print the info about the program before its launch\n
- * --help        print the help message about the cmd flags (does not launch program)\n
+ * --help        print the info about the program and print the help message about the cmd flags (does not launch program)\n
  * 
  * 
  * @returns 0 - default\n
