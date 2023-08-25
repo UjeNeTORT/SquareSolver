@@ -6,28 +6,37 @@
 #include "equation.h"
 #include "get_print_eq.h"
 
+/**
+ * @brief clears buffer
+ * @returns '\n' if the last symbol in buffer was '\n' \n
+ *           EOF if the last symbol in buffer was EOF \n
+ *           0   if it encountered not-space symbols while cleaning the buffer \n
+*/
+static int clearBuff(void);
 
-int getCoefs(struct equation *eq) {
+int readCoefs(struct equation *eq) { 
     assert (eq);
 
-    static const unsigned MAX_MISTAKES = 10; 
-    unsigned buffClearRes = 0, cntWrngLines = 0;
+    static const int MAX_MISTAKES = 10; 
+    int buffClearRes = 0, cntWrngLines = 0, scanfRes = 0;
 
     printf("# Please, enter a, b, c coefs:\n");
 
     while (true) {
+
         buffClearRes = 0;
-        if (scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c) == 3) 
+
+        if ((scanfRes = scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c)) == 3) 
             if ((buffClearRes = clearBuff()) != 0) break;
 
-        printf("Incorrect input, try again\n");
-
-        if (!buffClearRes)
+        if (scanfRes != 3)
             buffClearRes = clearBuff();
 
         if (buffClearRes == EOF)
             return ERR_EOF;
 
+        printf("Incorrect input, try again\n");
+        
         if (cntWrngLines++ >= MAX_MISTAKES)
             return ERR_OVERFLOW_INPUT;
     }
@@ -39,14 +48,14 @@ void printResult(struct equation *eq) {
     assert (eq);
 
     switch(eq->nRoots) {                
-        case ROOTS_0:               
+        case 0:               
             printf("no solutions\n");               
             break;              
-        case ROOTS_1:               
+        case 1:               
             printf("1 solution:\n"              
                    "%.3lf\n", eq->x1);              
             break;              
-        case ROOTS_2:               
+        case 2:               
             printf("2 solutions:\n"             
                    "%.3lf , %.3lf\n", eq->x1, eq->x2);              
             break;              
@@ -59,12 +68,12 @@ void printResult(struct equation *eq) {
     }               
 }               
 
-int clearBuff(void) {
+static int clearBuff(void) {
     int garbage = 0, notStumble = 1;
     
     while ((garbage = getchar()) != '\n' && garbage != EOF)
         if(!isspace(garbage))
             notStumble = 0;
-
+    
     return (notStumble) ? garbage : 0; 
 }

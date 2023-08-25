@@ -71,9 +71,9 @@ static void solveQuadrEq(const double a, const double b, const double c, double 
 
     if (isEqual(discriminant, 0)) {
         *x1 = *x2 = -b / (2 * a);
-        *nRoots = ROOTS_1;
+        *nRoots = 1;
     } else if (discriminant < 0) {
-        *nRoots = ROOTS_0;
+        *nRoots = 0;
     } else {
         double sqrtDiscriminant = 0;
 
@@ -85,7 +85,7 @@ static void solveQuadrEq(const double a, const double b, const double c, double 
         *x1 = (-b - sqrtDiscriminant) / (2 * a);
         *x2 = (-b + sqrtDiscriminant) / (2 * a);
 
-        *nRoots = ROOTS_2;
+        *nRoots = 2; 
 
         if (*x1 > *x2)
             swapDbl(x1, x2);
@@ -97,15 +97,16 @@ static void solveLinEq (const double a, const double b, double *x, int *nRoots) 
     assert (isfinite (b));
 
     assert (x);
+    assert (nRoots);
 
 
     if (!isEqual(a, 0)) {
         *x = -b / a;
-        *nRoots = ROOTS_1;
+        *nRoots = 1;
     } else if (isEqual(b, 0)) {
         *nRoots = ROOTS_INF;
     } else {
-        *nRoots = ROOTS_0;
+        *nRoots = 0;
     }
 
 }

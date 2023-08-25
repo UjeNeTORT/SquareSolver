@@ -1,6 +1,8 @@
 #ifndef TESTER_H
 #define TESTER_H
 
+#define DFLT_TEST_FILE "test_cases.txt"
+
 //-----------------------------------------------------
 /**
  * @struct testReference
@@ -25,23 +27,9 @@ struct testReference {
  * 
  * defines two variables (testsPassed, nLastTest) which are used later for printing test results\n
  * if test passed it prints it\n
- * if test failed it prints what is wrong (wrong roots order or root value or nRoots etc.)\n
+ * if test failed it prints what was wrong (wrong roots order or root value or nRoots etc.)\n
  * 
 */
-void testSolveSquare(void);
-
-//-----------------------------------------------------
-/**
- * @brief resets eq to initial value
- * @param [out] eq struct equation, which has all the necessary information about the equation (coefs, roots, number of roots)
-*/
-void resetEq(struct equation *eq);
-
-//-----------------------------------------------------
-/**
- * @brief resets testRef to initial value
- * @param [out] testRef pointer to struct testReference variable testRef
-*/
-void resetTestRef(struct testReference *testRef);
+void testSolveSquare(const char *fname);
 
 #endif

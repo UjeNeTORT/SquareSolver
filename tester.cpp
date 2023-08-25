@@ -8,11 +8,34 @@
 #include "square_solver.h"
 
 
-void testSolveSquare(void) {
-    
-    FILE *fp = fopen("test_cases.txt", "r"); 
+//-----------------------------------------------------
+/**
+ * @brief resets eq to initial value
+ * @param [out] eq struct equation, which has all the necessary information about the equation (coefs, roots, number of roots)
+*/
+static void resetEq(struct equation *eq);
 
-    assert (fp);
+//-----------------------------------------------------
+/**
+ * @brief resets testRef to initial value
+ * @param [out] testRef pointer to struct testReference variable testRef
+*/
+static void resetTestRef(struct testReference *testRef);
+
+void testSolveSquare(const char *fname) {
+
+    FILE *fp = NULL;
+
+    if (strcmp(fname, "default") == 0)
+        fp = fopen(DFLT_TEST_FILE, "r");
+    else
+        fp = fopen(fname, "r");
+
+    if (fp == NULL) {
+        printf("Unable to open the %s file, check if it's name is correct\n", fname);
+        return ;
+    }
+
 
     struct equation testEq = {0, 0, 0, 0, 0, -1};
     struct testReference testRef = {0, 0, 0, 0};
@@ -55,10 +78,10 @@ void testSolveSquare(void) {
            "##########################\n", testsPassed, nLastTest, (double) testsPassed / nLastTest * 100);
 }
 
-void resetEq(struct equation *eq) {
+static void resetEq(struct equation *eq) {
     *eq = {0, 0, 0, 0, 0, -1};
 }
 
-void resetTestRef(struct testReference *testRef) {
+static void resetTestRef(struct testReference *testRef) {
     *testRef = {0, 0, 0, 0};
 }

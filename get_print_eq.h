@@ -24,7 +24,7 @@ enum InputErrs {
  * if user mistakes during the input   it does not read the rest of the line and asks to try again\n
  * (for example types in a letter)\n
 */
-int getCoefs (struct equation *eq);
+int readCoefs (struct equation *eq);
 
 //-----------------------------------------------------
 /**
@@ -37,13 +37,5 @@ int getCoefs (struct equation *eq);
  * if roots are infinite    it prints *infinite solutions*\n
 */
 void printResult(struct equation *eq);
-
-/**
- * @brief clears buffer
- * @returns '\n' if the last symbol in buffer was '\n' \n
- *           EOF if the last symbol in buffer was EOF \n
- *           0   if it encountered not-space symbols while cleaning the buffer \n
-*/
-int clearBuff(void);
 
 #endif
