@@ -17,13 +17,8 @@
  * @param [out] launchDefaultFlag   1 - if after flags handling we should run the main program, 0 - if not 
  * 
  * @details 
- * Iterates through argv array while first symbol of the next argument is '-'.\n
- * It sets flagValue equal to the rest of the current argument (without '-').\n\n
+ * Look through the argv, if some args are not allowed, print error message
  * 
- * if (flagValue == "-test")\n     sets flags.testModeFLag to 1\n\n
- * if (flagValue == "-info")\n     sets flags.printInfoFlag to 1\n\n
- * if (flagValuse == "-help")\n    sets flags.printHelpFlag to 1\n\n
- * else\n                          prints error message\n\n
  * 
  * 
 */
