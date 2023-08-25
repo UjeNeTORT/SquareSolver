@@ -13,14 +13,14 @@
  * @brief resets eq to initial value
  * @param [out] eq struct equation, which has all the necessary information about the equation (coefs, roots, number of roots)
 */
-void resetEq(struct equation *eq);
+static void resetEq(struct equation *eq);
 
 //-----------------------------------------------------
 /**
  * @brief resets testRef to initial value
  * @param [out] testRef pointer to struct testReference variable testRef
 */
-void resetTestRef(struct testReference *testRef);
+static void resetTestRef(struct testReference *testRef);
 
 void testSolveSquare(const char *fname) {
 
