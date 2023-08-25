@@ -3,7 +3,7 @@
 
 ##### ATTENTION! 
 To use it you have to have g++ compiler installed on your PC. (guide for Windows: https://www.freecodecamp.org/news/how-to-install-c-and-cpp-compiler-on-windows/)
-
+<br>
 Installation guide:
 1. clone this repository to your computer (guide: https://docs.github.com/ru/repositories/creating-and-managing-repositories/cloning-a-repository)
 2. open folder where code is located and right-click an empty space in explorer, then click "Open in terminal"
