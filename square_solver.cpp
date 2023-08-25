@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
-#include <string.h>
 #include <assert.h>
 #include "equation.h"
 #include "square_solver.h"
@@ -27,7 +24,7 @@ static void solveQuadrEq(const double a, const double b, const double c, double 
 //-----------------------------------------------------
 /**
  * @brief solves linear equation ax + b = 0 
- * @param [in]  a       a-coefficient, a != 0
+ * @param [in]  a       a-coefficient
  * @param [in]  b       b-coefficient
  * @param [out] x       solution of the equation
  * @param [out] nRoots  number of roots of equation

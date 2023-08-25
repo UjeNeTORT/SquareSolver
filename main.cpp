@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <assert.h>
 #include "equation.h"
 #include "get_print_eq.h"
 #include "square_solver.h"
@@ -19,13 +17,8 @@
  * @param [out] launchDefaultFlag   1 - if after flags handling we should run the main program, 0 - if not 
  * 
  * @details 
- * Iterates through argv array while first symbol of the next argument is '-'.\n
- * It sets flagValue equal to the rest of the current argument (without '-').\n\n
+ * Look through the argv, if some args are not allowed, print error message
  * 
- * if (flagValue == "-test")\n     sets flags.testModeFLag to 1\n\n
- * if (flagValue == "-info")\n     sets flags.printInfoFlag to 1\n\n
- * if (flagValuse == "-help")\n    sets flags.printHelpFlag to 1\n\n
- * else\n                          prints error message\n\n
  * 
  * 
 */
@@ -68,7 +61,7 @@ int main(int argc, char *argv[]) {
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
         int resGetCoefs = readCoefs(&eq);
-        // TODO func
+        
         if (resGetCoefs == ERR_OVERFLOW_INPUT) {
             printf("Program cant run further: input overflow\n");
             return 1;
