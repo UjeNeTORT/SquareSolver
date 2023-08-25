@@ -24,7 +24,7 @@ enum InputErrs {
  * if user mistakes during the input   it does not read the rest of the line and asks to try again\n
  * (for example types in a letter)\n
 */
-int getCoefs (struct equation *eq);
+int readCoefs (struct equation *eq);
 
 //-----------------------------------------------------
 /**

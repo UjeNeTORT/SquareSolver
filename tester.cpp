@@ -10,7 +10,7 @@
 
 void testSolveSquare(void) {
     
-    FILE *fp = fopen("test_cases.txt", "r"); 
+    FILE *fp = fopen("test_cases.txt", "r"); // TODO read fname from argv 
 
     assert (fp);
 

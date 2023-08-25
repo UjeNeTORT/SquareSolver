@@ -88,13 +88,13 @@ int main(int argc, char *argv[]) {
 
         struct equation eq = {0, 0, 0, 0, 0, -1};
 
-        int resGetCoefs = getCoefs(&eq);
+        int resGetCoefs = readCoefs(&eq);
 
         if (resGetCoefs == ERR_OVERFLOW_INPUT) {
-            printf("too many mistakes\n");
+            printf("Program cant run further: input overflow\n");
             return 1;
         } else if (resGetCoefs == ERR_EOF) {
-            printf("end of the file\n");
+            printf("Program cant run further: end of the file\n");
             return 2;
         }
 
