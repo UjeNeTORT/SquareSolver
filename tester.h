@@ -1,8 +1,6 @@
 #ifndef TESTER_H
 #define TESTER_H
 
-#define DFLT_TEST_FILE "test_cases.txt"
-
 //-----------------------------------------------------
 /**
  * @struct testReference
