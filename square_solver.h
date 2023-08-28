@@ -1,7 +1,7 @@
 #ifndef SQUARE_SOLVER_H
 #define SQUARE_SOLVER_H
 
-const double EPS = 1e-6;
+static const double EPS = 1e-6;
 
 //-----------------------------------------------------
 /**
@@ -20,7 +20,32 @@ const double EPS = 1e-6;
 */
 void solveSquare (struct equation *eq);
 
+//-----------------------------------------------------
+/**
+ * @brief solves quadratic equation ax^2 + bx + c = 0
+ * @param [in]  a      a-coefficient
+ * @param [in]  b      b-coefficient
+ * @param [in]  c      c-coefficient
+ * @param [out] x1     smaller root
+ * @param [out] x2     bigger root
+ * @param [out] nRoots number of roots of the equation
+ * 
+ * @details
+ * if equation has no roots, nRoots = 0, x1 = 0, x2 = 0\n
+ * if equation has 1 root,   nRoots = 1, x1 = x2 = *root of equation*\n
+ * if equation has 2 roots,  nRoots = 2, x1 = *smaller root*, x2 = *bigger root*
+*/
+void solveQuadrEq(const double a, const double b, const double c, double *x1, double *x2, int *nRoots);
 
+//-----------------------------------------------------
+/**
+ * @brief solves linear equation ax + b = 0 
+ * @param [in]  a       a-coefficient
+ * @param [in]  b       b-coefficient
+ * @param [out] x       solution of the equation
+ * @param [out] nRoots  number of roots of equation
+*/
+void solveLinEq (const double a, const double b, double *x, int *nRoots);
 
 //-----------------------------------------------------
 /**

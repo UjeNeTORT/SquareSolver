@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <assert.h>
-#include <ctype.h>
 #include "equation.h"
 #include "get_print_eq.h"
+#include <assert.h>
+#include <ctype.h>
+#include <stdio.h>
 
 
 //-----------------------------------------------------
@@ -26,8 +26,7 @@ int readCoefs(struct equation *eq) {
 
         buffClearRes = 0;
 
-        if ((scanfRes = scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c)) == 3) 
-            if ((buffClearRes = clearBuff()) != 0) break;
+        if ((scanfRes = scanf("%lf %lf %lf", &eq->a, &eq->b, &eq->c)) == 3 && (buffClearRes = clearBuff()) != 0) break;
 
         if (scanfRes != 3)
             buffClearRes = clearBuff();
@@ -36,7 +35,7 @@ int readCoefs(struct equation *eq) {
             return ERR_EOF;
 
         printf("Incorrect input, try again\n");
-        
+
         if (cntWrngLines++ >= MAX_MISTAKES)
             return ERR_OVERFLOW_INPUT;
     }
@@ -60,8 +59,8 @@ void printResult(struct equation *eq) {
                    "%.3lf , %.3lf\n", eq->x1, eq->x2);              
             break;              
         case ROOTS_INF:             
-            printf("infinite solutions\n");             
-            break;              
+            printf("infinite solutions\n");
+            break;
         default:                
             printf("printResult: solveQuadrEq returned breeeed\n");             
             break;              

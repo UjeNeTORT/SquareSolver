@@ -1,8 +1,9 @@
+#include "cmdLine.h"
+#include "equation.h"
+#include "square_solver.h"
+#include "tester.h"
 #include <stdio.h>
 #include <string.h>
-#include "equation.h"
-#include "tester.h"
-#include "square_solver.h"
 
 
 //-----------------------------------------------------
@@ -23,14 +24,14 @@ void testSolveSquare(const char *fname) {
 
     FILE *fp = NULL;
 
-    if (strcmp(fname, "default") == 0)
+    if (strcmp(fname, DFLT_TEST_FILE) == 0)
         fp = fopen(DFLT_TEST_FILE, "r");
     else
         fp = fopen(fname, "r");
 
     if (fp == NULL) {
         printf("Unable to open the \"%s\" file, check if it's name is correct\n", fname);
-        return ;
+        return;
     }
 
 

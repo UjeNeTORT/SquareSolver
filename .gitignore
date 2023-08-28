@@ -2,3 +2,5 @@
 *.exe
 *.o
 docs
+Makefile.txt
+to_delete_test.txt
