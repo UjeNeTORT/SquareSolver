@@ -20,7 +20,10 @@ struct equation {
  * @enum RootsNum
 */
 enum RootsNum {
-    ROOTS_INF = 3,   ///< infinite roots
+    ROOTS_ZERO = 0,  ///< 0 roots
+    ROOTS_ONE  = 1,  ///< 1 roots
+    ROOTS_TWO  = 2,  ///< 2 roots
+    ROOTS_INF  = 3   ///< infinite roots
 };
 
-#endif
+#endif // EQUATION_H
